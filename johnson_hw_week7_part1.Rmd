@@ -1,0 +1,48 @@
+---
+title: "Homework Week 7 Part 1"
+output:
+  pdf_document: default
+  word_document: default
+fontsize: 11pt
+geometry: margin=1in
+data: "heights.csv"
+editor_options: 
+  chunk_output_type: console
+---
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+tinytex::install_tinytex()
+```
+
+Homework Week 7 Part 1:
+
+```{r}
+
+setwd("C:/Users/Matt/Desktop")
+
+## Load the `data/r4ds/heights.csv` to
+heights_df <- read.csv("heights.csv")
+
+## Using `cor()` compute correlation coefficients for
+## height vs. earn
+cor1 <- cor(heights_df$height, heights_df$earn, use = "all.obs", method = "pearson")
+print(cor1)
+### age vs. earn
+cor(heights_df$age, heights_df$earn, use = "all.obs", method = "pearson")
+### ed vs. earn
+cor(heights_df$ed, heights_df$earn, use = "all.obs", method = "pearson")
+## Spurious correlation
+## The following is data on US spending on science, space, and technology in millions of today's dollars
+## and Suicides by hanging strangulation and suffocation for the years 1999 to 2009
+## Compute the correlation between these variables
+
+tech_spending <- c(18079, 18594, 19753, 20734, 20831, 23029, 23597, 23584, 25525, 27731, 29449)
+suicides <- c(5427, 5688, 6198, 6462, 6635, 7336, 7248, 7491, 8161, 8578, 9000)
+
+cor(tech_spending,suicides, use = "all.obs", method = "spearman")
+
+```
+
+
+
+

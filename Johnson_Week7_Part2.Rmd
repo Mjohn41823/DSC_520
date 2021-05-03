@@ -1,0 +1,60 @@
+---
+title: "Homework Week 7 Part 2"
+author: "Everett Johnson"
+date: "5/2/2021"
+output:
+       pdf_document: default
+---
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+## Set the working directory to the root of your DSC 520 directory
+setwd("C:/Users/Matt/Desktop")
+
+
+survey_df <- read.csv("student_survey.csv")
+
+cov(survey_df$TimeReading, survey_df$TimeTV, use = "complete.obs", method = "pearson")
+cov(survey_df$Happiness, survey_df$Gender, use = "complete.obs", method = "pearson")
+cov(survey_df$Happiness, survey_df$TimeReading, use = "complete.obs", method = "pearson")
+cov(survey_df$Happiness, survey_df$TimeTV, use = "complete.obs", method = "pearson")
+```
+
+ i. The reason I would use covariance is because it can show the relationship between two variables and if those variables will move together either in a positive manner or negatively. We can see that the four variables, time reading, happiness, gender, and Time in front of the TV are all related in a few ways when it comes to covariance. Most noticeable is the negative relation from Time in front of the TV to happiness. This would indicate that either males or females who watch less tv are generally more happy. 
+
+ ii. Survey data appears to be as follows: Time in front of TV = minutes, Happiness - scale of 0 to 100, Gender- male or female based on a 0 or 1, time reading - could be minutes per day or month.
+
+iii. Basic correlation. Simple and easy to use based on the data provided. Will probably show that time in front of the tv and reading could be a negative factor to the level of happiness.
+
+```{r}
+cor(survey_df, use="complete.obs", method = "pearson")
+
+
+cor(survey_df$Happiness, survey_df$TimeReading, use ="complete.obs", method = 
+       "pearson")
+
+cor.test(survey_df$Happiness, survey_df$TimeReading, use ="complete.obs", method = 
+      "pearson", conf.level = .99)
+```
+
+ v. Correlation analysis shows that Happiness could be negatively correlated to Reading. This could indicate that the people who were surveyed generally do not like to read and do not find enjoyment in reading for pleasure. 
+```{r}
+survey_df_data <-(survey_df[, c("TimeReading", "Happiness", "Gender","TimeTV")])
+cor(survey_df_data)
+cor(survey_df_data)^2
+```
+vi. Based on the data above, I would say that watching more tv cause students to read less. Time is limited and therefore, only so much time could be alotted between the two.
+
+vii. Partial correlation - TimeTv is being controlled for. 
+```{r}
+library(ggm)
+pc<-pcor(c("TimeReading", "Happiness", "TimeTV"), var(survey_df))
+pc
+pc^2
+
+```
+
